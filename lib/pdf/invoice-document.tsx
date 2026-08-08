@@ -21,17 +21,22 @@ import type { CompanyData, ClientData, InvoiceDetails, LineItem, TotalsResult } 
 
 /**
  * Register Roboto font (supports Cyrillic U+0400–U+04FF).
- * Google Fonts CDN provides WOFF2/TTF files for free.
+ * Files are in public/fonts/ and served by Next.js at /fonts/*.
+ * @react-pdf/renderer fetches these via HTTP during PDF generation.
  */
+const fontBaseUrl = typeof window !== "undefined" 
+  ? window.location.origin 
+  : "http://localhost:3000";
+
 Font.register({
   family: "Roboto",
   fonts: [
     {
-      src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf",
+      src: `${fontBaseUrl}/fonts/Roboto-Regular.ttf`,
       fontWeight: 400,
     },
     {
-      src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-bold-webfont.ttf",
+      src: `${fontBaseUrl}/fonts/Roboto-Bold.ttf`,
       fontWeight: 700,
     },
   ],

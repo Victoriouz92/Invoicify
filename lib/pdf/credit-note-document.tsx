@@ -14,8 +14,31 @@ import {
   Text,
   View,
   StyleSheet,
+  Font,
 } from "@react-pdf/renderer";
 import type { CompanyData, ClientData, LineItem, TotalsResult } from "@/lib/types";
+
+/**
+ * Register Roboto font (supports Cyrillic U+0400–U+04FF).
+ * Files are in public/fonts/ and served by Next.js at /fonts/*.
+ */
+const fontBaseUrl = typeof window !== "undefined" 
+  ? window.location.origin 
+  : "http://localhost:3000";
+
+Font.register({
+  family: "Roboto",
+  fonts: [
+    {
+      src: `${fontBaseUrl}/fonts/Roboto-Regular.ttf`,
+      fontWeight: 400,
+    },
+    {
+      src: `${fontBaseUrl}/fonts/Roboto-Bold.ttf`,
+      fontWeight: 700,
+    },
+  ],
+});
 
 /** Props needed to render a complete credit note PDF */
 export interface CreditNotePDFProps {
@@ -34,7 +57,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 40,
     fontSize: 10,
-    fontFamily: "Helvetica",
+    fontFamily: "Roboto",
   },
   title: {
     fontSize: 18,
