@@ -100,7 +100,7 @@ export const translations = {
 
     // Action buttons
     generatePdf: "Генерирай PDF",
-    saveDraft: "Запази чернова",
+    saveDraft: "Запази",
     duplicate: "Дублирай",
     generatingPdf: "Генериране на PDF...",
     pdfSuccess: "PDF генериран успешно!",

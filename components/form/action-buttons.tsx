@@ -194,15 +194,15 @@ export function ActionButtons() {
             transition={{ duration: 0.15 }}
             className="flex flex-wrap gap-3"
           >
-            <Button type="button" onClick={handleGeneratePDF} size="lg" data-shortcut-pdf>
-              <FileText className="h-4 w-4" data-icon="inline-start" />
-              {t.generatePdf}
-            </Button>
             <Button type="button" variant="outline" size="lg" onClick={handleSaveDraft}>
               <Save className="h-4 w-4" data-icon="inline-start" />
               {t.saveDraft}
             </Button>
-            {canDuplicate ? (
+            <Button type="button" onClick={handleGeneratePDF} size="lg" data-shortcut-pdf>
+              <FileText className="h-4 w-4" data-icon="inline-start" />
+              {t.generatePdf}
+            </Button>
+            {canDuplicate && (
               <DropdownMenu>
                 <DropdownMenuTrigger
                   render={
@@ -230,28 +230,18 @@ export function ActionButtons() {
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
+            )}
+            {canCreateCreditNote && (
               <Button
                 type="button"
                 variant="outline"
                 size="lg"
-                disabled
-                title={t.duplicateTooltip}
+                onClick={() => setCreditNoteOpen(true)}
               >
-                <Copy className="h-4 w-4" data-icon="inline-start" />
-                {t.duplicate}
+                <FileDown className="h-4 w-4" data-icon="inline-start" />
+                {t.createCreditNote}
               </Button>
             )}
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              disabled={!canCreateCreditNote}
-              onClick={() => setCreditNoteOpen(true)}
-            >
-              <FileDown className="h-4 w-4" data-icon="inline-start" />
-              {t.createCreditNote}
-            </Button>
           </motion.div>
         )}
 

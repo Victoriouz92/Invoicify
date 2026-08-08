@@ -15,8 +15,27 @@ import {
   Text,
   View,
   StyleSheet,
+  Font,
 } from "@react-pdf/renderer";
 import type { CompanyData, ClientData, InvoiceDetails, LineItem, TotalsResult } from "@/lib/types";
+
+/**
+ * Register Roboto font (supports Cyrillic U+0400–U+04FF).
+ * Google Fonts CDN provides WOFF2/TTF files for free.
+ */
+Font.register({
+  family: "Roboto",
+  fonts: [
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-regular-webfont.ttf",
+      fontWeight: 400,
+    },
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-bold-webfont.ttf",
+      fontWeight: 700,
+    },
+  ],
+});
 
 /** Props needed to render a complete invoice PDF */
 export interface InvoicePDFProps {
@@ -32,7 +51,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 40,
     fontSize: 10,
-    fontFamily: "Helvetica",
+    fontFamily: "Roboto",
   },
   header: {
     marginBottom: 20,
