@@ -67,6 +67,7 @@ export const translations = {
     eikInvalidChecksum: "Невалиден ЕИК — моля, проверете дали е въведен правилно",
     eikInvalid: "Невалиден ЕИК",
     eikSearching: "Търсене...",
+    eikAutoFilled: "Данни заредени от Търговски регистър",
 
     // Invoice details
     invoiceDetails: "Данни за фактурата",
@@ -201,6 +202,7 @@ export const translations = {
     eikInvalidChecksum: "Invalid EIK — please check if entered correctly",
     eikInvalid: "Invalid EIK",
     eikSearching: "Searching...",
+    eikAutoFilled: "Data loaded from Trade Registry",
 
     // Invoice details
     invoiceDetails: "Invoice Details",

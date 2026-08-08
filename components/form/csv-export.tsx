@@ -49,7 +49,7 @@ export function CsvExport() {
 
     const { content, filename } = generateCsv(filtered, selectedYear, selectedMonth);
     downloadCsv(content, filename);
-  }, [drafts, selectedYear, selectedMonth, t]);
+  }, [drafts, selectedYear, selectedMonth, t, setNoDataMessage]);
 
   // Generate year options (current year and 2 years back)
   const currentYear = now.getFullYear();

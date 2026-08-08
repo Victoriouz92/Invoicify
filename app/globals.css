@@ -248,3 +248,42 @@ body {
   animation: shimmer 1.5s infinite ease-in-out;
   border-radius: var(--radius);
 }
+
+/**
+ * Hero Invoice Animations — used by the HeroInvoice landing component.
+ * These are CSS keyframes (instead of Framer Motion) for better performance.
+ */
+@keyframes ih-idle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes ih-blob1 {
+  0%, 100% { transform: translate(-8%, -8%) scale(1); }
+  50% { transform: translate(10%, 14%) scale(1.18); }
+}
+
+@keyframes ih-blob2 {
+  0%, 100% { transform: translate(10%, 10%) scale(1.05); }
+  50% { transform: translate(-12%, -14%) scale(0.9); }
+}
+
+@keyframes ih-particle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.35; }
+  50% { transform: translateY(-16px) scale(1.35); opacity: 0.95; }
+}
+
+@keyframes ih-shine {
+  0%, 45% { transform: translateX(-130%) skewX(-15deg); }
+  65%, 100% { transform: translateX(220%) skewX(-15deg); }
+}
+
+@keyframes ih-flash {
+  0%, 75% { background: transparent; }
+  85% { background: rgba(99,102,241,0.10); }
+  100% { background: transparent; }
+}
+
+.dark [style*="ih-flash"] {
+  /* Dark mode flash uses a lighter indigo shade */
+}

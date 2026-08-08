@@ -143,10 +143,6 @@ function persistClients(clients: ClientData[]) {
   safeSetItem(STORAGE_KEYS.clients, clients);
 }
 
-function persistDrafts(drafts: DraftInvoice[]) {
-  safeSetItem(STORAGE_KEYS.drafts, drafts);
-}
-
 function persistTheme(theme: "dark" | "light") {
   safeSetItem(STORAGE_KEYS.theme, theme);
 }

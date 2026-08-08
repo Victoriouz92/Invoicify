@@ -21,6 +21,7 @@ import {
   Check,
   Lock,
 } from "lucide-react";
+import { HeroInvoice } from "@/components/landing/hero-invoice";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { STORAGE_KEYS } from "@/lib/constants";
@@ -115,7 +116,6 @@ function FAQItem({
 
 export default function LandingPage() {
   const sectionAnim = useSectionAnimation();
-  const prefersReduced = useReducedMotion();
   const [invoiceCount, setInvoiceCount] = useState(0);
 
   // Read invoice count from localStorage on mount
@@ -142,78 +142,8 @@ export default function LandingPage() {
         animate="visible"
         className="flex flex-col items-center justify-center min-h-[80vh] px-6 text-center"
       >
-        {/* Animated floating realistic invoice */}
-        <motion.div
-          animate={
-            prefersReduced
-              ? {}
-              : { y: [0, -10, 0], rotateX: [0, 1.5, 0], rotateY: [-1, 1, -1] }
-          }
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="mb-12 relative"
-          style={{ perspective: 1000 }}
-        >
-          {/* Glow effect behind the card */}
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/10 blur-3xl rounded-3xl scale-110" />
-          
-          {/* The invoice card */}
-          <div className="relative w-64 sm:w-72 rounded-2xl bg-white dark:bg-zinc-900 border border-white/20 dark:border-zinc-700/50 shadow-2xl shadow-indigo-500/10 dark:shadow-indigo-500/5 backdrop-blur-sm p-6 space-y-4">
-            {/* Header */}
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Фактура</span>
-              <span className="text-[9px] text-zinc-400 dark:text-zinc-500 font-mono">№ 0000000042</span>
-            </div>
-
-            {/* Supplier / Client */}
-            <div className="grid grid-cols-2 gap-3 text-[8px] text-zinc-500 dark:text-zinc-400">
-              <div>
-                <p className="font-semibold text-zinc-700 dark:text-zinc-200 text-[9px]">Кодекс ООД</p>
-                <p>ЕИК: 204517839</p>
-                <p>гр. София</p>
-              </div>
-              <div className="text-right">
-                <p className="font-semibold text-zinc-700 dark:text-zinc-200 text-[9px]">Клиент АД</p>
-                <p>ЕИК: 831642181</p>
-                <p>гр. Пловдив</p>
-              </div>
-            </div>
-
-            {/* Mini line items table */}
-            <div className="border-t border-zinc-100 dark:border-zinc-800 pt-3 space-y-1.5 text-[8px]">
-              <div className="flex justify-between text-zinc-400 dark:text-zinc-500 uppercase tracking-wider text-[7px]">
-                <span>Описание</span>
-                <span>Сума</span>
-              </div>
-              <div className="flex justify-between text-zinc-600 dark:text-zinc-300">
-                <span>Уеб дизайн услуги</span>
-                <span className="font-mono">1,200.00</span>
-              </div>
-              <div className="flex justify-between text-zinc-600 dark:text-zinc-300">
-                <span>SEO оптимизация</span>
-                <span className="font-mono">480.00</span>
-              </div>
-              <div className="flex justify-between text-zinc-600 dark:text-zinc-300">
-                <span>Поддръжка (3 мес.)</span>
-                <span className="font-mono">360.00</span>
-              </div>
-            </div>
-
-            {/* Total */}
-            <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 flex justify-between items-center">
-              <span className="text-[9px] font-semibold text-zinc-700 dark:text-zinc-200">Общо</span>
-              <span className="text-sm font-bold font-mono bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                2,040.00 EUR
-              </span>
-            </div>
-
-            {/* Stamp-like "Original" badge */}
-            <div className="absolute top-4 right-4 rotate-[-8deg]">
-              <span className="text-[7px] font-bold text-indigo-500/40 dark:text-indigo-400/30 uppercase border border-indigo-500/30 dark:border-indigo-400/20 rounded px-1.5 py-0.5 tracking-wider">
-                Оригинал
-              </span>
-            </div>
-          </div>
-        </motion.div>
+        {/* Animated invoice card stack */}
+        <HeroInvoice />
 
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text text-transparent">
           Invoicify
@@ -221,10 +151,19 @@ export default function LandingPage() {
         <p className="mt-4 text-base sm:text-lg md:text-xl text-muted-foreground max-w-md px-2">
           Създавайте легално валидни фактури за секунди. Безплатно, бързо и без регистрация.
         </p>
+
+        {/* CTA with shine sweep effect */}
         <Link
           href="/create"
-          className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25"
+          className="mt-8 relative inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg shadow-primary/25 overflow-hidden"
         >
+          {/* Shine sweep overlay */}
+          <span
+            className="absolute inset-0 pointer-events-none"
+            style={{ animation: "ih-shine 5s ease-in-out infinite" }}
+          >
+            <span className="block w-12 h-full bg-white/20" />
+          </span>
           Създай фактура за 10 секунди
         </Link>
       </motion.section>

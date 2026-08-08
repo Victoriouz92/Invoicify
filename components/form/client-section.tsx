@@ -34,6 +34,7 @@ export function ClientSection() {
 
   const [eikError, setEikError] = useState<string | null>(null);
   const [eikLoading, setEikLoading] = useState(false);
+  const [eikAutoFilled, setEikAutoFilled] = useState(false);
   const [saveMessage, setSaveMessage] = useState<string | null>(null);
 
   function handleClientSelect(value: string | null) {
@@ -76,9 +77,11 @@ export function ClientSection() {
     // Attempt EIK lookup for auto-fill
     setEikLoading(true);
     try {
-      const data = await lookupCompanyByEIK(client.eik);
-      if (data) {
-        setClient({ name: data.name, address: data.address, mol: data.mol });
+      const result = await lookupCompanyByEIK(client.eik);
+      if (result.data) {
+        setClient({ name: result.data.name, address: result.data.address, mol: result.data.mol });
+        setEikAutoFilled(true);
+        setTimeout(() => setEikAutoFilled(false), 4000);
       }
     } finally {
       setEikLoading(false);
@@ -163,6 +166,9 @@ export function ClientSection() {
         </div>
         {eikError && (
           <p className="text-xs text-destructive">{eikError}</p>
+        )}
+        {eikAutoFilled && (
+          <p className="text-xs text-green-600 dark:text-green-400">{t.eikAutoFilled}</p>
         )}
       </div>
 

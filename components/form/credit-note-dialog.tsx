@@ -126,7 +126,7 @@ export function CreditNoteDialog({ open, onOpenChange }: CreditNoteDialogProps) 
       const { CreditNotePDF } = await import("@/lib/pdf/credit-note-document");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pdfDocument = (
+      const pdfDocument: any = (
         <CreditNotePDF
           company={company}
           client={selectedDraft.client}
@@ -138,7 +138,7 @@ export function CreditNoteDialog({ open, onOpenChange }: CreditNoteDialogProps) 
           totals={totals}
           reason={reason}
         />
-      ) as any;
+      );
 
       const blob = await Promise.race([
         pdf(pdfDocument).toBlob(),
